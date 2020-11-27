@@ -39,14 +39,16 @@ var LinkedList = function () {
       return null
     }
 
-    //2개이상
-    var preNode = this.head
-    var tempNode = this.head.next
-    while (tempNode.next != null) {
-      preNode = preNode.next
+    //2개이상 -- 오류
+    let pre = this.head
+    let temp = this.head.next
+    while (temp.next != null) {
+      // console.log(pre)
+      pre = pre.next //next가 null
     }
-    preNode.next = null
-    return node
+    pre.next = null
+    this.tail = pre
+    return temp
   }
 
   //데이터로 찾기
@@ -61,21 +63,39 @@ var LinkedList = function () {
         return
       }
     }
-    console.log(count)
-    console.log(temp.data)
-    return count, temp.data
+    console.log('count:' , count)
+    return count //몇번째 인지 return
   }
 
-  //데이터로 노드 찾기 + 노드 값 바꾸기
-  LinkedList.prototype.DataChange = function (count, data, changeData) {}
+  //데이터로 노드 찾기 + 노드 값 바꾸기 -- 오류
+  LinkedList.prototype.DataChange = function (data, changeData) {
+    var data = LinkedList.prototype.DataSearch(data)
+    var pre = this.head
+    while (data) {
+      console.log('data===>',pre.data)
+      pre = pre.next //next가 null
+    }
+    // var temp = pre.next
+    // var node = new Node(changeData)
+    // node.next = temp.next
+  }
 
   //데이터로 노드 찾기 + 노드 삭제
-  LinkedList.prototype.DataRemove = function (count, data) {}
+  LinkedList.prototype.DataRemove = function (data) {
+    var count = LinkedList.prototype.DataSearch(data)
+    var pre = this.head
+    
+  }
 
+  //오름차순 정렬
+  LinkedList.prototype.AscendingSort = function () {
+       
+  }
+  
   LinkedList.prototype.Print = function () {
     let currentNode = this.head
     while (!(currentNode.next == null)) {
-      console.log(currentNode.next)
+      console.log(currentNode)
       currentNode = currentNode.next
     }
   }
@@ -84,9 +104,9 @@ var LinkedList = function () {
 
 const lists = new LinkedList()
 lists.prototype.TailAdd(3)
-lists.prototype.TailAdd(5)
 lists.prototype.TailAdd(4)
+lists.prototype.TailAdd(5)
 lists.prototype.TailAdd(6)
-lists.prototype.TailAdd(7)
 lists.prototype.Print()
-lists.prototype.DataSearch(7)
+lists.prototype.DataChange(5,10)
+lists.prototype.Print()
