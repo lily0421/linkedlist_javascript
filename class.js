@@ -19,7 +19,7 @@ class Linked {
   print() {
     var currNode = this.head
     while (!(currNode.next == null)) {
-      console.log(currNode.next)
+      console.log(currNode.data)
       currNode = currNode.next
     }
   }
