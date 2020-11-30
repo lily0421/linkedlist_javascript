@@ -74,8 +74,9 @@ class LinkedList {
     let change = 0
     while (current.next != null) {
       if (current.value < current.next.value) {
-        current = changes(current, current.next)
-        change = 1
+        pre = next
+        next = current
+        current = pre
       }
       current = current.next
     }
@@ -100,7 +101,7 @@ class LinkedList {
   print = () => {
     let currNode = this.head;
     while (currNode !== null) {
-      console.log(`${currNode} 이다`);
+      console.log(`${currNode.value} 이다`);
       currNode = currNode.next;
     }
   };
@@ -116,5 +117,5 @@ newList.tailPush(4);
 newList.tailPush(3);
 newList.tailPush(2);
 newList.tailPush(1);
-newList.ascendingSort();
+// newList.ascendingSort();
 newList.print();
