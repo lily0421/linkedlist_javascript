@@ -84,7 +84,7 @@ class LinkedList {
       current = current.next
     }
 
-    
+
     let currNode = this.head;
     while (currNode !== null) {
       console.log(`${currNode.value} 이다`);
