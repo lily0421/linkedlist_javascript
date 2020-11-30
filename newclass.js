@@ -71,31 +71,25 @@ class LinkedList {
     let pre = null
     let current = this.head
     let next = current.next
-    let change = 0
     while (current.next != null) {
-      if (current.value < current.next.value) {
+      if (current.value > current.next.value) {
+        console.log(current)
         pre = next
         next = current
         current = pre
+        console.log("바뀐 c", current.value)
+        console.log("바뀐 n", next.value)
+        console.log(current.next.value)
       }
       current = current.next
     }
 
-
-    // if (current.next !== null) {
-    //   console.log("c", current.value)
-    //   console.log("n", next.value)
-    //   while (current.next) {
-    //     while (current.value > current.next.value) {
-    //       pre = next
-    //       next = current
-    //       current = pre
-    //       console.log("바뀐 c", current.value)
-    //       console.log("바뀐 n", next.value)
-    //       console.log(current.next.value)
-    //     }
-    //   }
-    // }
+    
+    let currNode = this.head;
+    while (currNode !== null) {
+      console.log(`${currNode.value} 이다`);
+      currNode = currNode.next;
+    }
   }
 
   print = () => {
@@ -117,5 +111,5 @@ newList.tailPush(4);
 newList.tailPush(3);
 newList.tailPush(2);
 newList.tailPush(1);
-// newList.ascendingSort();
-newList.print();
+newList.ascendingSort();
+// newList.print();
