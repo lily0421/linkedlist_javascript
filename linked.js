@@ -1,4 +1,5 @@
-let head;
+// call by value 가 되버림
+var head;
 class List {
     constructor(value, next = null) {
         this.value = value;

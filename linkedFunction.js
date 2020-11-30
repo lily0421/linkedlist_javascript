@@ -71,7 +71,7 @@ var List = function () {
     var data = LinkedList.prototype.DataSearch(data);
     var pre = this.head;
     while (data) {
-      console.log("data===>", pre.data);
+      console.log("data===>", pre)
       pre = pre.next; //next가 null
     }
     // var temp = pre.next
