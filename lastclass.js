@@ -2,6 +2,7 @@ class LinkedList {
     constructor() {
         this.head = new Node();
     }
+
     tailPush(value) {
         const node = new Node(value);
 
@@ -14,6 +15,7 @@ class LinkedList {
     }
 
     tailDelete() {
+        hhhh
 
         let currNode = this.head;
         while (currNode.next.next) {
@@ -54,17 +56,38 @@ class LinkedList {
     }
 
     ascendingSort() {
-        let currNode = this.head.next;
-        let prevNode = this.head;
+        let currNode = this.head.next; // 최소값 찾기
+        let newNode = new LinkedList(); //오름차순으로 최소 값 넣기
 
+        // 첫번째
         while (currNode.next !== null) {
-            if (currNode.next.value < currNode.value) {
-                prevNode.changetoNextNode();
-            } else {
-                prevNode = currNode;
-                currNode = currNode.next;
+            if (currNode.next.value > currNode.value) {
+                currNode.changetoNextNode();
             }
+            currNode = this.head.next
+            //최종 currNode = 1
         }
+        // 가장 작은 값 찾기
+        newNode.tailPush(currNode.value)// 새 노드에 최소값이 들어감
+        // newNode.print()
+        this.tailDelete()// 기존 가장 작은 값 삭제
+
+        // 두번째
+        while (currNode.next !== null) {
+            if (currNode.next.value > currNode.value) {
+                currNode.changetoNextNode();
+            }
+            currNode = this.head.next
+            //최종 cur
+
+            rNode = 1
+        }
+        // 가장 작은 값 찾기
+        newNode.tailPush(currNode.value)
+        // 새 노드에 최소값이 들어감
+        // newNode.print()
+        this.tailDelete()
+        // 기존 가장 작은 값 삭제
     };
 
     print() {
@@ -81,13 +104,9 @@ class Node {
         this.next = null;
     }
     changetoNextNode() {
-        if (this.next != null && this.next.next != null) {
-            const target = this.next;
-            const final = target.next.next;
-            this.next = target.next;
-            this.next.next = target;
-            this.next.next.next = final
-        }
+        const targetValue = this.value
+        this.value = this.next.value;
+        this.next.value = targetValue;
     }
 }
 const newList = new LinkedList();
@@ -98,4 +117,4 @@ newList.tailPush(3);
 newList.tailPush(8);
 newList.tailPush(7);
 newList.ascendingSort();
-newList.print();
+// newList.print();
