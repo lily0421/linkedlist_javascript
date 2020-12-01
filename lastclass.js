@@ -15,8 +15,6 @@ class LinkedList {
     }
 
     tailDelete() {
-        hhhh
-
         let currNode = this.head;
         while (currNode.next.next) {
             currNode = currNode.next;
@@ -58,42 +56,24 @@ class LinkedList {
     ascendingSort() {
         let currNode = this.head.next; // 최소값 찾기
         let newNode = new LinkedList(); //오름차순으로 최소 값 넣기
-
-        // 첫번째
-        while (currNode.next !== null) {
-            if (currNode.next.value > currNode.value) {
-                currNode.changetoNextNode();
+        while (currNode) {
+            while (currNode.next !== null) { // 가장 작은 값 찾기
+                if (currNode.next.value > currNode.value) {
+                    currNode.changetoNextNode();
+                }
+                currNode = currNode.next
             }
+            newNode.tailPush(currNode.value) // 새 노드에 최소값이 들어감
+            this.tailDelete() // 기존 가장 작은 값 삭제
             currNode = this.head.next
-            //최종 currNode = 1
         }
-        // 가장 작은 값 찾기
-        newNode.tailPush(currNode.value)// 새 노드에 최소값이 들어감
-        // newNode.print()
-        this.tailDelete()// 기존 가장 작은 값 삭제
-
-        // 두번째
-        while (currNode.next !== null) {
-            if (currNode.next.value > currNode.value) {
-                currNode.changetoNextNode();
-            }
-            currNode = this.head.next
-            //최종 cur
-
-            rNode = 1
-        }
-        // 가장 작은 값 찾기
-        newNode.tailPush(currNode.value)
-        // 새 노드에 최소값이 들어감
-        // newNode.print()
-        this.tailDelete()
-        // 기존 가장 작은 값 삭제
+        newNode.print()
     };
 
     print() {
         let currNode = this.head.next;
         while (currNode !== null) {
-            console.log(`${currNode.value} 이다`);
+            console.log(`${currNode.value} -> `);
             currNode = currNode.next;
         }
     };
