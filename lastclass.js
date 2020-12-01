@@ -2,6 +2,7 @@ class LinkedList {
     constructor() {
         this.head = new Node();
     }
+
     tailPush(value) {
         const node = new Node(value);
 
@@ -14,7 +15,6 @@ class LinkedList {
     }
 
     tailDelete() {
-
         let currNode = this.head;
         while (currNode.next.next) {
             currNode = currNode.next;
@@ -54,23 +54,26 @@ class LinkedList {
     }
 
     ascendingSort() {
-        let currNode = this.head.next;
-        let prevNode = this.head;
-
-        while (currNode.next !== null) {
-            if (currNode.next.value < currNode.value) {
-                prevNode.changetoNextNode();
-            } else {
-                prevNode = currNode;
-                currNode = currNode.next;
+        let currNode = this.head.next; // 최소값 찾기
+        let newNode = new LinkedList(); //오름차순으로 최소 값 넣기
+        while (currNode) {
+            while (currNode.next !== null) { // 가장 작은 값 찾기
+                if (currNode.next.value > currNode.value) {
+                    currNode.changetoNextNode();
+                }
+                currNode = currNode.next
             }
+            newNode.tailPush(currNode.value) // 새 노드에 최소값이 들어감
+            this.tailDelete() // 기존 가장 작은 값 삭제
+            currNode = this.head.next
         }
+        newNode.print()
     };
 
     print() {
         let currNode = this.head.next;
         while (currNode !== null) {
-            console.log(`${currNode.value} 이다`);
+            console.log(`${currNode.value} -> `);
             currNode = currNode.next;
         }
     };
@@ -81,13 +84,9 @@ class Node {
         this.next = null;
     }
     changetoNextNode() {
-        if (this.next != null && this.next.next != null) {
-            const target = this.next;
-            const final = target.next.next;
-            this.next = target.next;
-            this.next.next = target;
-            this.next.next.next = final
-        }
+        const targetValue = this.value
+        this.value = this.next.value;
+        this.next.value = targetValue;
     }
 }
 const newList = new LinkedList();
@@ -98,4 +97,4 @@ newList.tailPush(3);
 newList.tailPush(8);
 newList.tailPush(7);
 newList.ascendingSort();
-newList.print();
+// newList.print();
