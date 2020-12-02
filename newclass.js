@@ -1,115 +1,101 @@
 class LinkedList {
-  constructor() {
-    this.head = null;
-  }
-  tailPush = (value) => {
-    const node = new Node(value);
-    if (!this.head) {
-      // 길이가 0이면
-      this.head = node;
-    } else {
-      let currNode = this.head;
-      while (currNode.next) {
-        currNode = currNode.next;
-      }
-      currNode.next = node;
+    constructor() {
+        this.head = new Node();
     }
-  };
 
-  tailDelete = () => {
-    if (!this.head) {
-      // 길이가 0이면
-      return null
-    } else if (!this.head.next) {
-      //길이가 1이면
-      this.head = null
-    } else {
-      let currNode = this.head;
-      while (currNode.next.next) {
-        currNode = currNode.next;
-      }
-      currNode.next = null
-    }
-  }
+    tailPush(value) {
+        const node = new Node(value);
 
-  deleteValue = (value) => {
-    let currNode = this.head
-    if (currNode.value === value) {
-      this.head = currNode.next
-
-    }
-    while (currNode.next !== null) {
-      if (currNode.next.value === value) {
-        let delNode = currNode.next
-        if (delNode.next != null) {
-          //중간 노드 삭제시
-          currNode.next = delNode.next
-        } else {
-          //마지막 노드 삭제시
-          currNode.next = null
-          return
+        let currNode = this.head;
+        while (currNode.next) {
+            currNode = currNode.next;
         }
-      }
-      currNode = currNode.next;
-    }
-  }
+        currNode.next = node;
 
-  changeValue = (value, changeValue) => {
-    //바꾸고자 하는 노드, 바꾸고 싶은 값
-    let currNode = this.head
-    if (currNode.value === value) {
-      currNode.value = changeValue
-    }
-    while (currNode.value !== value) {
-      currNode = currNode.next
-    }
-    currNode.value = changeValue
-  }
-
-  ascendingSort = () => {
-    //다 넣어 있는 상태에서 오름차순
-    let pre = null
-    let current = this.head
-    let next = current.next
-    while (current.next != null) {
-      if (current.value > current.next.value) {
-        console.log(current)
-        pre = next
-        next = current
-        current = pre
-        console.log("바뀐 c", current.value)
-        console.log("바뀐 n", next.value)
-        console.log(current.next.value)
-      }
-      current = current.next
     }
 
+    tailDelete() { //1개 이상 노드가 있다고 가정
+        let currNode = this.head;
+        while (currNode.next.next) {
+            currNode = currNode.next;
+        }
+        currNode.next = null;
+    };
 
-    let currNode = this.head;
-    while (currNode !== null) {
-      console.log(`${currNode.value} 이다`);
-      currNode = currNode.next;
-    }
-  }
+    deleteValue(value) {//중복시 처음 것 만 제거
+        let currNode = this.head;
+        while (currNode.next !== null) {
+            if (currNode.next.value === value) {
+                let delNode = currNode.next;
+                if (delNode.next != null) {
+                    //중간 노드 삭제시
+                    currNode.next = delNode.next;
+                } else {
+                    //마지막 노드 삭제시
+                    currNode.next = null;
+                    return;
+                }
+            }
+            currNode = currNode.next;
+        }
+    };
 
-  print = () => {
-    let currNode = this.head;
-    while (currNode !== null) {
-      console.log(`${currNode.value} 이다`);
-      currNode = currNode.next;
+    changeValue = (value, changeValue) => {
+        //중복시 처음 것 만 바꾸기
+        //바꾸고자 하는 노드 값, 바꾸고 싶은 값
+        let currNode = this.head
+        if (currNode.value === value) {
+            currNode.value = changeValue
+        }
+        while (currNode.value !== value) {
+            currNode = currNode.next
+        }
+        currNode.value = changeValue
     }
-  };
+
+    ascendingSort() {
+        let currNode = this.head.next; // 최소값 찾기
+        let newNode = new LinkedList(); //오름차순으로 최소 값 넣기
+        while (currNode) {
+            while (currNode.next !== null) { // 가장 작은 값 찾기
+                if (currNode.next.value > currNode.value) {
+                    currNode.changeToNextNode();
+                }
+                currNode = currNode.next
+            }
+            newNode.tailPush(currNode.value) // 새 노드에 최소값이 들어감
+            this.tailDelete() // 기존 가장 작은 값 삭제
+            currNode = this.head.next
+        }
+        newNode.print()
+    };
+
+    print() {
+        let currNode = this.head.next;
+        while (currNode !== null) {
+            console.log(`${currNode.value} -> `);
+            currNode = currNode.next;
+        }
+    };
 }
 class Node {
-  constructor(value) {
-    this.value = value;
-    this.next = null;
-  }
+    constructor(value) {
+        this.value = value;
+        this.next = null;
+    }
+    changeToNextNode() {
+        const targetValue = this.value
+        this.value = this.next.value;
+        this.next.value = targetValue;
+    }
 }
 const newList = new LinkedList();
-newList.tailPush(4);
-newList.tailPush(3);
-newList.tailPush(2);
+newList.tailPush(5);
 newList.tailPush(1);
+newList.tailPush(6);
+newList.tailPush(3);
+newList.tailPush(4);
+newList.tailPush(8);
+newList.tailPush(7);
 newList.ascendingSort();
-// newList.print();
+newList.print();
