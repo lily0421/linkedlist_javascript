@@ -76,6 +76,7 @@ class LinkedList {
             console.log(`${currNode.value} -> `);
             currNode = currNode.next;
         }
+        console.log("End")
     };
 }
 class Node {
@@ -97,5 +98,5 @@ newList.tailPush(3);
 newList.tailPush(4);
 newList.tailPush(8);
 newList.tailPush(7);
-newList.ascendingSort();
 newList.print();
+newList.ascendingSort();
