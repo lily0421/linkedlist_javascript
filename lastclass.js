@@ -14,16 +14,15 @@ class LinkedList {
 
     }
 
-    tailDelete() {
+    tailDelete() { //1개 이상 노드가 있다고 가정
         let currNode = this.head;
         while (currNode.next.next) {
             currNode = currNode.next;
         }
         currNode.next = null;
-
     };
 
-    deleteValue(value) {
+    deleteValue(value) {//중복시 처음 것 만 제거
         let currNode = this.head;
         while (currNode.next !== null) {
             if (currNode.next.value === value) {
@@ -42,7 +41,8 @@ class LinkedList {
     };
 
     changeValue = (value, changeValue) => {
-        //바꾸고자 하는 노드, 바꾸고 싶은 값
+        //중복시 처음 것 만 바꾸기
+        //바꾸고자 하는 노드 값, 바꾸고 싶은 값
         let currNode = this.head
         if (currNode.value === value) {
             currNode.value = changeValue
@@ -59,7 +59,7 @@ class LinkedList {
         while (currNode) {
             while (currNode.next !== null) { // 가장 작은 값 찾기
                 if (currNode.next.value > currNode.value) {
-                    currNode.changetoNextNode();
+                    currNode.changeToNextNode();
                 }
                 currNode = currNode.next
             }
@@ -83,18 +83,20 @@ class Node {
         this.value = value;
         this.next = null;
     }
-    changetoNextNode() {
+    changeToNextNode() {
         const targetValue = this.value
         this.value = this.next.value;
         this.next.value = targetValue;
     }
 }
 const newList = new LinkedList();
+
 newList.tailPush(5);
-newList.tailPush(1);
-newList.tailPush(6);
+newList.tailDelete()
+newList.tailPush(5);
 newList.tailPush(3);
+newList.tailPush(6);
 newList.tailPush(8);
 newList.tailPush(7);
-newList.ascendingSort();
-// newList.print();
+newList.changeValue(8, 10)
+newList.print();
