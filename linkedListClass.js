@@ -13,7 +13,8 @@ class LinkedList {
         currentNode.next = node;
     }
 
-    tailDelete() { //1개 이상 노드가 있다고 가정
+    tailDelete() {
+        //1개 이상 노드가 있다고 가정
         let currentNode = this.head;
         while (currentNode.next.next) {
             currentNode = currentNode.next;
@@ -21,16 +22,15 @@ class LinkedList {
         currentNode.next = null;
     };
 
-    searchValueToDelete(value) {//중복시 처음 것 만 제거
+    searchValueToDelete(value) {
+        //중복시 처음 것 만 제거
         let currentNode = this.head;
         while (currentNode.next !== null) {
             if (currentNode.next.value === value) {
                 let delNode = currentNode.next;
                 if (delNode.next != null) {
-                    //중간 노드 삭제시
                     currentNode.next = delNode.next;
                 } else {
-                    //마지막 노드 삭제시
                     currentNode.next = null;
                     return;
                 }
@@ -53,7 +53,8 @@ class LinkedList {
 
     ascendingSort() {
         let currentNode = this.head.next;
-        let newNode = new LinkedList();
+        let newLinkedList = new LinkedList();
+
         while (currentNode) {
             while (currentNode.next !== null) {
                 if (currentNode.next.value > currentNode.value) {
@@ -61,11 +62,11 @@ class LinkedList {
                 }
                 currentNode = currentNode.next
             }
-            newNode.tailPush(currentNode.value)
+            newLinkedList.tailPush(currentNode.value)
             this.tailDelete()
             currentNode = this.head.next
         }
-        newNode.print()
+        newLinkedList.print()
     };
 
     print() {
@@ -74,7 +75,7 @@ class LinkedList {
             console.log(`${currentNode.value} -> `);
             currentNode = currentNode.next;
         }
-        console.log("End")
+        console.log("LinkedList End")
     };
 
     randomNumbers() {
@@ -89,6 +90,7 @@ class Node {
         this.value = value;
         this.next = null;
     }
+
     changeToNextNode() {
         const targetValue = this.value
         this.value = this.next.value;
