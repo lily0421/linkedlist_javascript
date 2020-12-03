@@ -1,3 +1,6 @@
+//예외처리
+//sort다시
+
 class LinkedList {
     constructor() {
         this.head = new Node();
@@ -14,8 +17,11 @@ class LinkedList {
     }
 
     tailDelete() {
-        //1개 이상 노드가 있다고 가정
         let currentNode = this.head;
+        if (currentNode.next == null) {
+            console.log("No Node")
+            return;
+        }
         while (currentNode.next.next) {
             currentNode = currentNode.next;
         }
@@ -25,11 +31,16 @@ class LinkedList {
     searchValueToDelete(value) {
         //중복시 처음 것 만 제거
         let currentNode = this.head;
+        if (currentNode.next == null) {
+            console.log("No search value delete")
+            return;
+        }
         while (currentNode.next !== null) {
             if (currentNode.next.value === value) {
                 let delNode = currentNode.next;
                 if (delNode.next != null) {
                     currentNode.next = delNode.next;
+                    return;
                 } else {
                     currentNode.next = null;
                     return;
@@ -42,8 +53,9 @@ class LinkedList {
     searchValueToChange = (value, changeValue) => {
         //중복시 처음 것 만 바꾸기
         let currentNode = this.head
-        if (currentNode.value === value) {
-            currentNode.value = changeValue
+        if (currentNode.value == null) {
+            console.log("No search value change")
+            return;
         }
         while (currentNode.value !== value) {
             currentNode = currentNode.next
@@ -99,6 +111,12 @@ class Node {
 }
 
 const newList = new LinkedList();
-newList.randomNumbers()
+newList.tailPush(1);
+newList.tailPush(3);
+newList.tailPush(4);
+newList.tailPush(5);
 newList.print();
-newList.ascendingSort();
+newList.searchValueToChange(2, 4);
+// newList.randomNumbers()
+newList.print();
+// newList.ascendingSort();
