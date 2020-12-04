@@ -72,11 +72,10 @@ class LinkedList {
     }
 
     var currentNode = this.head.next;
-
     while (count) {
       while (currentNode.next !== null) {
         if (currentNode.next.value < currentNode.value) {
-          currentNode.changeToNextNode(currentNode.next, currentNode);
+          this.changeToNextNode(currentNode.next, currentNode);
         }
         currentNode = currentNode.next
       }
@@ -100,18 +99,18 @@ class LinkedList {
       this.tailPush(Math.floor(Math.random() * 100 + 1));
     }
   }
+
+  changeToNextNode(next, current) {
+    var temp = next.value
+    next.value = current.value
+    current.value = temp
+  }
 }
 
 class Node {
   constructor(value) {
     this.value = value;
     this.next = null;
-  }
-
-  changeToNextNode(next, current) {
-    var temp = next.value
-    next.value = current.value
-    current.value = temp
   }
 }
 
