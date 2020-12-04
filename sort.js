@@ -64,14 +64,14 @@ class LinkedList {
   }
 
   ascendingSort() {
-    var currentNode = this.head.next;
-    var count = 0
-    while (currentNode !== null) {
-      currentNode = currentNode.next
+    let countNode = this.head.next;
+    let currentNode = this.head.next;
+    let count = 0
+    while (countNode !== null) {
+      countNode = countNode.next
       count++
     }
 
-    var currentNode = this.head.next;
     while (count) {
       while (currentNode.next !== null) {
         if (currentNode.next.value < currentNode.value) {
@@ -94,16 +94,16 @@ class LinkedList {
     console.log("LinkedList End")
   };
 
-  randomNumbers() {
-    for (var i = 0; i < 10; i++) {
-      this.tailPush(Math.floor(Math.random() * 100 + 1));
-    }
-  }
-
   changeToNextNode(next, current) {
     var temp = next.value
     next.value = current.value
     current.value = temp
+  }
+
+  randomNumbers() {
+    for (var i = 0; i < 10; i++) {
+      this.tailPush(Math.floor(Math.random() * 100 + 1));
+    }
   }
 }
 
