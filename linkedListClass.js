@@ -61,10 +61,10 @@ class LinkedList {
     }
 
     ascendingSort() {
-        var currentNode = this.head.next;
+        var countNode = this.head.next;
         var count = 0
-        while (currentNode !== null) {
-            currentNode = currentNode.next
+        while (countNode !== null) {
+            countNode = countNode.next
             count++
         }
 
