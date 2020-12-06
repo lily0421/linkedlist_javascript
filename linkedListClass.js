@@ -73,7 +73,7 @@ class LinkedList {
         while (count) {
             while (currentNode.next !== null) {
                 if (currentNode.next.value < currentNode.value) {
-                    currentNode.changeToNextNode(currentNode.next, currentNode);
+                    this.changeToNextNode(currentNode.next, currentNode);
                 }
                 currentNode = currentNode.next
             }
@@ -82,6 +82,12 @@ class LinkedList {
         }
         this.print()
     };
+
+    changeToNextNode(next, current) {
+        var temp = next.value
+        next.value = current.value
+        current.value = temp
+    }
 
     print() {
         let currentNode = this.head.next;
@@ -103,12 +109,6 @@ class Node {
     constructor(value) {
         this.value = value;
         this.next = null;
-    }
-
-    changeToNextNode(next, current) {
-        var temp = next.value
-        next.value = current.value
-        current.value = temp
     }
 }
 
