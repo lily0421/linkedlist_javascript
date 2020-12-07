@@ -113,13 +113,6 @@ class Node {
 }
 
 const newList = new LinkedList();
-newList.tailPush(1);
-newList.tailPush(2);
-newList.tailPush(10);
-newList.tailPush(4);
-newList.tailPush(5);
-newList.searchValueToChange(5, 40)
-newList.searchValueToChange(3, 10)
-// newList.randomNumbers()
+newList.randomNumbers()
 newList.print();
-// newList.ascendingSort();
+newList.ascendingSort();
