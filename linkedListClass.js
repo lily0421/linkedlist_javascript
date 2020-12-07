@@ -93,13 +93,13 @@ class LinkedList {
   };
 
   changeToNextNode(next, current) {
-    var temp = next.value
+    let temp = next.value
     next.value = current.value
     current.value = temp
   }
 
   randomNumbers() {
-    for (var i = 0; i < 10; i++) {
+    for (let i = 0; i < 10; i++) {
       this.tailPush(Math.floor(Math.random() * 100 + 1));
     }
   }
